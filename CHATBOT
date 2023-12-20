@@ -1,0 +1,40 @@
+print("BOT: Welcome to Our Restaurant! ^_^")
+print("BOT: May I know your name, please?")
+name = input("USER: ")
+print(f'BOT: Hi {name}! Here is our menu. What would you like to order?')
+
+menu = {
+    "1": {"item": "Burger", "price": 5.99},
+    "2": {"item": "Pizza", "price": 8.99},
+    "3": {"item": "Salad", "price": 3.99},
+    "4": {"item": "Pasta", "price": 7.99},
+    "5": {"item": "Soft Drink", "price": 1.99}
+}
+
+order = {}
+
+while True:
+    print("BOT: Menu:")
+    for key, value in menu.items():
+        print(f"  {key}. {value['item']} - ${value['price']}")
+
+    choice = input(f'{name}, enter the number of the item you want to order (or type "done" to finish): ')
+
+    if choice.lower() == "done":
+        break
+
+    if choice in menu:
+        quantity = int(input(f'Enter the quantity of {menu[choice]["item"]} you want: '))
+        order[menu[choice]["item"]] = {"quantity": quantity, "total_price": quantity * menu[choice]["price"]}
+    else:
+        print("BOT: Invalid choice. Please select a valid item from the menu.")
+
+print("\nBOT: Your Order Summary:")
+total_order_price = 0
+
+for item, details in order.items():
+    print(f"  {item} - Quantity: {details['quantity']}, Total Price: ${details['total_price']:.2f}")
+    total_order_price += details['total_price']
+
+print(f"BOT: Your total order price is: ${total_order_price:.2f}")
+print("BOT: Thank you for ordering! Enjoy your meal!")
